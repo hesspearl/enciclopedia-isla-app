@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx", 
+    "lib": ["DOM", "ESNext"], 
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "parserOptions": {
+  "project": "./tsconfig.json",
+ 
+  "sourceType": "module"
+}
+
+}
