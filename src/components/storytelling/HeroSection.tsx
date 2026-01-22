@@ -1,18 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { serverBaseUrl } from "../../data/server";
 
 export default function HeroSection({
   card,
   onStart,
 }: {
-  card: {
-    id: string;
-    title: string;
-    short_description: string;
-    cover_image?: string;
-    main_description?: string;
-  };
+  card: Card;
   onStart: () => void;
 }) {
   return (
@@ -21,7 +16,7 @@ export default function HeroSection({
       <div className="absolute inset-0">
         <motion.img
           src={
-            card.cover_image ||
+            serverBaseUrl + card.cover_image.url ||
             "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1920"
           }
           alt={card.title}

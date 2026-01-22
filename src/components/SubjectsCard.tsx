@@ -1,17 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { serverBaseUrl } from "../data/server";
 
 export default function SubjectCard({
   card,
   index,
 }: {
-  card: {
-    id: string;
-    title: string;
-    short_description: string;
-    cover_image?: string;
-  };
+  card: Card;
   index: number;
 }) {
   return (
@@ -21,7 +17,7 @@ export default function SubjectCard({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <Link to={`/Storytelling/${card.id}`}>
+      <Link to={`/Storytelling/${card.documentId}`}>
         <motion.div
           className="group relative overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer"
           whileHover={{ y: -8 }}
@@ -30,7 +26,7 @@ export default function SubjectCard({
           <div className="relative h-48 overflow-hidden">
             <motion.img
               src={
-                card.cover_image ||
+                serverBaseUrl + card.cover_image.url ||
                 "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800"
               }
               alt={card.title}
@@ -44,8 +40,7 @@ export default function SubjectCard({
           {/* Content */}
           <div className="p-6">
             <h3
-              className="text-lg font-semibold text-gray-900 mb-2 transition-colors duration-300"
-              style={{ "--hover-color": "#06342a" }}
+              className="hover-text text-lg font-semibold text-gray-900 mb-2 transition-colors duration-300"
               onMouseEnter={(e) => (e.currentTarget.style.color = "#06342a")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "")}
             >

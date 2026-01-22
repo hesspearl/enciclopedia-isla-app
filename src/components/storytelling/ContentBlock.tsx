@@ -1,18 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { serverBaseUrl } from "../../data/server";
 
 export default function ContentBlock({
   block,
   index,
 }: {
-  block: {
-    title: string;
-    description: string;
-    image_url?: string;
-  };
+  block: Card_Blocks;
   index: number;
 }) {
   const isEven = index % 2 === 0;
+
+  console.log(serverBaseUrl + block.image_url.url);
 
   return (
     <motion.div
@@ -38,7 +37,7 @@ export default function ContentBlock({
           <div className="relative overflow-hidden rounded-3xl shadow-2xl">
             <motion.img
               src={
-                block.image_url ||
+                serverBaseUrl + block.image_url.url ||
                 "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800"
               }
               alt={block.title}

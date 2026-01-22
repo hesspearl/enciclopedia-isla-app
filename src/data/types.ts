@@ -193,17 +193,3 @@ export const cards: Card[] = [
       "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
   },
 ];
-
-export interface Card {
-  id: string;
-  subject_id: string;
-  title: string;
-  short_description: string;
-  main_description?: string;
-  content_blocks: {
-    title: string;
-    description: string;
-    image_url: string;
-  }[];
-  cover_image: string;
-}

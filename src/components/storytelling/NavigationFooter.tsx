@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { Link, replace, useNavigate } from "react-router-dom";
 import { Home, ArrowRight, Sparkles, Undo2 } from "lucide-react";
-import { Card } from "../../data/subjects";
 
 export default function NavigationFooter({
   nextCard,
   checkIsLastCard,
 }: {
-  nextCard: Card | null;
+  nextCard: {
+    title: string;
+    documentId: string;
+  } | null;
   checkIsLastCard: () => boolean;
 }) {
   const navigate = useNavigate();
@@ -75,8 +77,8 @@ export default function NavigationFooter({
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              navigate("/"),
-                window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+              (navigate("/"),
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" }));
             }}
           >
             <Home className="w-5 h-5" />
@@ -85,7 +87,7 @@ export default function NavigationFooter({
 
           {/* Next Card Button */}
           {nextCard && (
-            <Link to={`/Storytelling/${nextCard.id}`}>
+            <Link to={`/Storytelling/${nextCard.documentId}`}>
               <motion.button
                 className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
                 style={{

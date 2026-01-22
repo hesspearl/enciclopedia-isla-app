@@ -4,18 +4,8 @@ import { BookOpen } from "lucide-react";
 import SubjectCard from "./SubjectsCard";
 
 type SubjectProps = {
-  subject: {
-    id: string;
-    icon: string;
-    title: string;
-    description?: string;
-  };
-  cards: {
-    id: string;
-    title: string;
-    short_description: string;
-    cover_image?: string;
-  }[];
+  subject: Subject;
+  cards: Card[];
 };
 
 const SubjectSection = ({ subject, cards }: SubjectProps) => {
@@ -57,7 +47,7 @@ const SubjectSection = ({ subject, cards }: SubjectProps) => {
       {cards.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {cards.map((card, index) => (
-            <SubjectCard key={card.id} card={card} index={index} />
+            <SubjectCard key={card.documentId} card={card} index={index} />
           ))}
         </div>
       ) : (

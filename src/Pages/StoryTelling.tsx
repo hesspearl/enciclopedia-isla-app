@@ -6,8 +6,9 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
+import { fetchSelectedCard } from "../data/GetCards";
+import { fetchSelectedSubject } from "../data/GetSubjects";
 //import WhatsAppButton from "../components/WhatsAppButton";
-import { cards as allCards } from "../data/subjects";
 
 export default function Storytelling() {
   const { cardId } = useParams();
@@ -15,33 +16,72 @@ export default function Storytelling() {
   const [showBackButton, setShowBackButton] = useState(false);
   const navigate = useNavigate();
   const pathname = useLocation();
-  const currentCard = allCards.find((c) => c.id === cardId);
+  //const currentCard = allCards.find((c) => c.documentId === cardId);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [subject, setSubjects] = useState<{
+    data: {
+      subject_id: string;
+      cards: {
+        documentId: string;
+        title: string;
+      }[];
+    };
+    isLoading: boolean;
+  }>({
+    data: {
+      subject_id: "",
+      cards: [],
+    },
+    isLoading: true,
+  });
+  const [currentCard, setCard] = useState<{
+    data: Card;
+    isLoading: boolean;
+  }>({
+    data: {} as Card,
+    isLoading: true,
+  });
+
+  useEffect(() => {
+    if (cardId) {
+      fetchSelectedCard(cardId)
+        .then((res) => setCard({ isLoading: false, data: res }))
+        .catch((err) => console.log(err));
+    }
+  }, [cardId]);
+
+  useEffect(() => {
+    if (!currentCard.isLoading) {
+      fetchSelectedSubject(currentCard.data.subject.documentId)
+        .then((res) => setSubjects({ isLoading: false, data: res }))
+        .catch((err) => console.log(err));
+    }
+  }, [currentCard]);
 
   useEffect(() => {
     buttonRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
 
-  const sameSubjectCards = allCards.filter(
-    (c) => c.subject_id === currentCard?.subject_id,
-  );
-
-  const currentIndex = sameSubjectCards.findIndex(
-    (c) => c.id === currentCard?.id,
+  const currentIndex = subject.data.cards.findIndex(
+    (c) => c.documentId === currentCard?.data.documentId,
   );
   // Find next card in the same subject
   const nextCard = React.useMemo(() => {
-    if (!currentCard || !allCards.length) return null;
+    if (!currentCard || !subject.data.cards.length) return null;
 
-    if (currentIndex < sameSubjectCards.length - 1) {
-      return sameSubjectCards[currentIndex + 1];
+    if (currentIndex < subject.data.cards.length - 1) {
+      return subject.data.cards[currentIndex + 1];
     }
 
-    return sameSubjectCards[0] || null;
-  }, [currentCard, allCards]);
+    if (subject.data.cards.length < 2) {
+      return null;
+    }
+
+    return subject.data.cards[0] || null;
+  }, [currentCard, subject.data.cards]);
 
   const checkIsLastCard = () => {
-    if (currentIndex === sameSubjectCards.length - 1) {
+    if (currentIndex === subject.data.cards.length - 1) {
       return true;
     }
     return false;
@@ -65,7 +105,7 @@ export default function Storytelling() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [cardId]);
 
-  if (!currentCard) {
+  if (currentCard.isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-stone-50 px-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
@@ -110,12 +150,12 @@ export default function Storytelling() {
       </motion.div>
 
       {/* Hero Section */}
-      <HeroSection card={currentCard} onStart={scrollToContent} />
+      <HeroSection card={currentCard.data} onStart={scrollToContent} />
 
       {/* Content Blocks */}
       <div ref={contentRef} className="bg-white">
-        {currentCard.content_blocks?.length > 0 ? (
-          currentCard.content_blocks.map((block, index) => (
+        {currentCard.data.content_blocks?.length > 0 ? (
+          currentCard.data.content_blocks.map((block, index) => (
             <ContentBlock key={index} block={block} index={index} />
           ))
         ) : (
