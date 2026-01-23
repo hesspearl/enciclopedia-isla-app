@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { serverBaseUrl } from "../../data/server";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 export default function ContentBlock({
   block,
@@ -10,8 +11,6 @@ export default function ContentBlock({
   index: number;
 }) {
   const isEven = index % 2 === 0;
-
-  console.log(serverBaseUrl + block.image_url.url);
 
   return (
     <motion.div
@@ -80,7 +79,7 @@ export default function ContentBlock({
           />
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            {block.description}
+            <BlocksRenderer content={block.description} />
           </p>
         </motion.div>
       </div>

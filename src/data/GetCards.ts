@@ -29,8 +29,8 @@ export const fetchSelectedCard = async (documentId: string) => {
       query Card($documentId: ID!) {
         card(documentId: $documentId) {
            subject {
-     documentId
-    }
+            documentId
+          }
           content_blocks {
             title
             image_url {

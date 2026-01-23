@@ -99,7 +99,7 @@ function Home() {
                 className="w-2 h-2 rounded-full animate-pulse"
                 style={{ backgroundColor: "#06342a" }}
               />
-              <span>Para novos muçulmanos e curiosos</span>
+              <span>Ambiente para novos muçulmanos e curiosos</span>
             </motion.div>
           </motion.div>
         </div>

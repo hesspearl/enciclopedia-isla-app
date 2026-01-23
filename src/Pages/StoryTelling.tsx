@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LoaderPinwheel } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollRestoration } from "react-router-dom";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -8,7 +8,6 @@ import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
 import { fetchSelectedCard } from "../data/GetCards";
 import { fetchSelectedSubject } from "../data/GetSubjects";
-//import WhatsAppButton from "../components/WhatsAppButton";
 
 export default function Storytelling() {
   const { cardId } = useParams();
@@ -105,7 +104,20 @@ export default function Storytelling() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [cardId]);
 
-  if (currentCard.isLoading) {
+  if (currentCard.isLoading || subject.isLoading) {
+    return (
+      <div className="flex items-center justify-center py-32">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        >
+          <LoaderPinwheel className="w-8 h-8" style={{ color: "#06342a" }} />
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (!currentCard.data.content_blocks.length) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-stone-50 px-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
