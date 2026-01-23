@@ -16,7 +16,7 @@ export default function HeroSection({
       <div className="absolute inset-0">
         <motion.img
           src={
-            serverBaseUrl + card.cover_image.url ||
+            card.cover_image.url ||
             "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1920"
           }
           alt={card.title}

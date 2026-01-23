@@ -36,7 +36,7 @@ export default function ContentBlock({
           <div className="relative overflow-hidden rounded-3xl shadow-2xl">
             <motion.img
               src={
-                serverBaseUrl + block.image_url.url ||
+                block.image_url.url ||
                 "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800"
               }
               alt={block.title}

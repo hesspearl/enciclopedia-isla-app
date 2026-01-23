@@ -15,7 +15,6 @@ export default function Storytelling() {
   const [showBackButton, setShowBackButton] = useState(false);
   const navigate = useNavigate();
   const pathname = useLocation();
-  //const currentCard = allCards.find((c) => c.documentId === cardId);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [subject, setSubjects] = useState<{
     data: {
@@ -37,7 +36,20 @@ export default function Storytelling() {
     data: Card;
     isLoading: boolean;
   }>({
-    data: {} as Card,
+    data: {
+      documentId: "",
+      subject: {
+        subject_id: "",
+        documentId: "",
+      },
+      title: "",
+      short_description: "",
+      main_description: "",
+      content_blocks: [],
+      cover_image: {
+        url: "",
+      },
+    },
     isLoading: true,
   });
 
@@ -165,17 +177,19 @@ export default function Storytelling() {
       <HeroSection card={currentCard.data} onStart={scrollToContent} />
 
       {/* Content Blocks */}
-      <div ref={contentRef} className="bg-white">
-        {currentCard.data.content_blocks?.length > 0 ? (
-          currentCard.data.content_blocks.map((block, index) => (
-            <ContentBlock key={index} block={block} index={index} />
-          ))
-        ) : (
-          <div className="py-32 text-center text-gray-500">
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        )}
-      </div>
+      {
+        <div ref={contentRef} className="bg-white">
+          {currentCard?.data?.content_blocks?.length > 0 ? (
+            currentCard.data.content_blocks.map((block, index) => (
+              <ContentBlock key={index} block={block} index={index} />
+            ))
+          ) : (
+            <div className="py-32 text-center text-gray-500">
+              <p>Conteúdo em desenvolvimento...</p>
+            </div>
+          )}
+        </div>
+      }
 
       {/* Navigation Footer */}
       <NavigationFooter nextCard={nextCard} checkIsLastCard={checkIsLastCard} />

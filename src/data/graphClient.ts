@@ -2,7 +2,7 @@ import axios from "axios";
 import { serverBaseUrl } from "./server";
 
 export const graphqlClient = axios.create({
-  baseURL: serverBaseUrl,
+  baseURL: `${serverBaseUrl}/graphql`,
   headers: {
     "Content-Type": "application/json",
   },

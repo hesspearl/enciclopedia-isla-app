@@ -1,3 +1,4 @@
+"use server";
 import { graphqlClient } from "./graphClient";
 
 export const fetchCards = async () => {

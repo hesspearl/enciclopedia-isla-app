@@ -26,7 +26,7 @@ export default function SubjectCard({
           <div className="relative h-48 overflow-hidden">
             <motion.img
               src={
-                serverBaseUrl + card.cover_image.url ||
+                card.cover_image.url ||
                 "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800"
               }
               alt={card.title}
