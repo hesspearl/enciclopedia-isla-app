@@ -57,7 +57,7 @@ export default function Storytelling() {
     if (cardId) {
       fetchSelectedCard(cardId)
         .then((res) => setCard({ isLoading: false, data: res }))
-        .catch((err) => console.log(err));
+        .catch((err) => console.warn(err));
     }
   }, [cardId]);
 
@@ -65,7 +65,7 @@ export default function Storytelling() {
     if (!currentCard.isLoading) {
       fetchSelectedSubject(currentCard.data.subject.documentId)
         .then((res) => setSubjects({ isLoading: false, data: res }))
-        .catch((err) => console.log(err));
+        .catch((err) => console.warn(err));
     }
   }, [currentCard]);
 
