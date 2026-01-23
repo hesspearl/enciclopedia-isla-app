@@ -2,6 +2,10 @@
 
 :root {
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-base: theme("fontSize.base"); /* 1rem (16px) */
+  --font-xl: theme("fontSize.xl");
+  --font-2xl: theme("fontSize.2xl");
+  --font-3xl: theme("fontSize.3xl");
 }
 
 body {
@@ -45,4 +49,21 @@ html {
 
 .hover-text {
   --hover-text: "#06342a";
+}
+
+h1 {
+  font-size: var(--font-3xl);
+  font-weight: bold;
+}
+
+h2 {
+  font-size: var(--font-2xl);
+  font-weight: bold;
+}
+h3 {
+  font-size: (--font-xl);
+  font-weight: bold;
+}
+p {
+  font-size: var(--font-base);
 }

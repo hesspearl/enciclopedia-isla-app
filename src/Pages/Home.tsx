@@ -21,10 +21,10 @@ function Home() {
   useEffect(() => {
     fetchSubjects()
       .then((res) => setSubjects({ isLoading: false, data: res }))
-      .catch((err) => console.log(err));
+      .catch((err) => console.warn(err));
     fetchCards()
       .then((res) => setCards({ isLoading: false, data: res }))
-      .catch((err) => console.log(err));
+      .catch((err) => console.warn(err));
   }, []);
 
   return (

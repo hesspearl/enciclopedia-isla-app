@@ -36,7 +36,7 @@ export const fetchSelectedCard = async (documentId: string) => {
             image_url {
               url
             }
-            description
+            content_rich_text
             card {
               card_id
             }

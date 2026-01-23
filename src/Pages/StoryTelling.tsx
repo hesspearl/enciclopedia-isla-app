@@ -15,7 +15,6 @@ export default function Storytelling() {
   const [showBackButton, setShowBackButton] = useState(false);
   const navigate = useNavigate();
   const pathname = useLocation();
-  //const currentCard = allCards.find((c) => c.documentId === cardId);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [subject, setSubjects] = useState<{
     data: {
@@ -45,7 +44,7 @@ export default function Storytelling() {
     if (cardId) {
       fetchSelectedCard(cardId)
         .then((res) => setCard({ isLoading: false, data: res }))
-        .catch((err) => console.log(err));
+        .catch((err) => console.warn(err));
     }
   }, [cardId]);
 
@@ -53,7 +52,7 @@ export default function Storytelling() {
     if (!currentCard.isLoading) {
       fetchSelectedSubject(currentCard.data.subject.documentId)
         .then((res) => setSubjects({ isLoading: false, data: res }))
-        .catch((err) => console.log(err));
+        .catch((err) => console.warn(err));
     }
   }, [currentCard]);
 

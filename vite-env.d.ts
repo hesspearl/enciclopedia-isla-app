@@ -37,7 +37,7 @@ type Card_Blocks = {
   image_url: {
     url: string;
   };
-  description: [];
+  content_rich_text: [];
 
   card: {
     card_id: string;
