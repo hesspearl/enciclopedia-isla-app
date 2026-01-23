@@ -7,10 +7,11 @@ export default function WhatsAppButton() {
   const [hideBubble, setIsHideBubble] = useState(false);
 
   // Substitua pelo número de WhatsApp que você deseja usar
-  const whatsappNumber = "5511999999999"; // Formato: código do país + DDD + número
-  const message = "Olá! Gostaria de saber mais sobre o Islã.";
+  const whatsappNumber = "5521966305390"; // Formato: código do país + DDD + número
+  const message =
+    "Olá! Gostaria de saber mais sobre o Islã. Encontrei seu contato pelo site.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  console.log("hideBubble:", hideBubble, "isExpanded:", isExpanded);
+
   return (
     <>
       <motion.div
@@ -78,11 +79,11 @@ export default function WhatsAppButton() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-1">
-                      Descubra sobre o Islã com muçulmanos.
+                      Se você deseja entender melhor o Islã, estamos aqui.
                     </h3>
                     <p className="text-sm text-slate-600">
-                      Estamos aqui para responder suas perguntas sobre o Islã
-                      com respeito, clareza e sem "mistérios".
+                      Um espaço aberto para conhecer o Islã com clareza,
+                      respeito e tranquilidade.
                     </p>
                   </div>
                 </div>
