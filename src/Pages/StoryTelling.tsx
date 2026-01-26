@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
-import { fetchSelectedCard } from "../data/GetCards";
+import { fetchSelectedCard } from "../../netlify/functions/GetCards";
 import { fetchSelectedSubject } from "../data/GetSubjects";
 
 export default function Storytelling() {

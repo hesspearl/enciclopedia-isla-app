@@ -1,5 +1,4 @@
-"use server";
-import { graphqlClient } from "./graphClient";
+import { graphqlClient } from "../../src/data/graphClient";
 
 export const fetchCards = async () => {
   const response = await graphqlClient.post("", {

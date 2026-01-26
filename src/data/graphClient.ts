@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const graphqlClient = axios.create({
-  baseURL: "http://localhost:1337/graphql",
+  baseURL: `${import.meta.env.VITE_BASE_URL}/graphql`,
   headers: {
     "Content-Type": "application/json",
   },
