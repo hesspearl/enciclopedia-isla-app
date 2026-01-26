@@ -38,6 +38,7 @@ export default function Storytelling() {
   }>({
     data: {
       documentId: "",
+      card_id: "",
       subject: {
         subject_id: "",
         documentId: "",
@@ -57,12 +58,13 @@ export default function Storytelling() {
     if (cardId) {
       axios
         .get("/.netlify/functions/getCardById", {
-          params: { documentId: cardId },
+          params: { cardId },
         })
         .then((res) => setCard({ isLoading: false, data: res.data }))
         .catch((err) => console.warn(err));
     }
   }, [cardId]);
+  console.log(currentCard.data);
 
   useEffect(() => {
     if (!currentCard.isLoading) {

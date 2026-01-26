@@ -3,36 +3,41 @@ import axios from "axios";
 const netlifyBaseUrl = process.env.VITE_BASE_URL;
 
 exports.handler = async (event: HandlerEvent) => {
-  const { documentId } = event.queryStringParameters as { documentId: string };
+  const { cardId } = event.queryStringParameters as { cardId: string };
   try {
     const response = await axios.post(`${netlifyBaseUrl}/graphql`, {
       query: `
-      query Card($documentId: ID!) {
-        card(documentId: $documentId) {
-           subject {
-            documentId
-          }
-          content_blocks {
-            title
-            image_url {
-              url
-            }
-            content_rich_text
-            card {
-              card_id
-            }
-          }
-          cover_image {
-            url
-          }
-          documentId
-          title
-          main_description
-        }
+      query Cards($filters: CardFiltersInput) {
+  cards(filters: $filters) {
+    card_id
+    documentId
+    title
+    subject {
+      documentId
+    }
+    content_blocks {
+      title
+      image_url {
+        url
       }
+      content_rich_text
+      card {
+        card_id
+      }
+    }
+    cover_image {
+      url
+    }
+    main_description
+  }
+}
     `,
       variables: {
-        documentId,
+        filters: {
+          card_id: {
+            eq: cardId,
+          },
+        },
       },
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +47,7 @@ exports.handler = async (event: HandlerEvent) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data.data.card),
+      body: JSON.stringify(response.data.data.cards[0]),
     };
   } catch (error) {
     return {

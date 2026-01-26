@@ -7,6 +7,7 @@ export const fetchCards = async () => {
     query  {
   cards {
   documentId
+  card_id
     title
     short_description
     cover_image {

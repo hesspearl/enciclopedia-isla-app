@@ -10,6 +10,7 @@ interface ImportMeta {
 
 interface Card {
   documentId: string;
+  card_id: string;
   subject: {
     subject_id: string;
     documentId: string;

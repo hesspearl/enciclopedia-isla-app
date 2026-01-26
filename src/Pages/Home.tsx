@@ -27,6 +27,8 @@ function Home() {
       .catch((err) => console.warn(err));
   }, []);
 
+  console.log(cards.data);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white">
       {/* Hero Section */}

@@ -27,6 +27,7 @@ export const fetchSelectedSubject = async (documentId: string) => {
     cards {
       title
       documentId
+      card_id
     }
   }
 }
