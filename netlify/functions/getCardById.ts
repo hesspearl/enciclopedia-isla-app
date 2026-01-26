@@ -3,9 +3,9 @@ const netlifyBaseUrl = process.env.VITE_BASE_URL;
 
 exports.handler = async (event) => {
   const { documentId } = event.queryStringParameters;
-
-  const response = await axios.post(`${netlifyBaseUrl}/graphql`, {
-    query: `
+  try {
+    const response = await axios.post(`${netlifyBaseUrl}/graphql`, {
+      query: `
       query Card($documentId: ID!) {
         card(documentId: $documentId) {
            subject {
@@ -30,14 +30,23 @@ exports.handler = async (event) => {
         }
       }
     `,
-    variables: {
-      documentId,
-    },
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.VITE_API_TOKEN_SALT}`,
-    },
-  });
+      variables: {
+        documentId,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.VITE_API_TOKEN_SALT}`,
+      },
+    });
 
-  return JSON.stringify(response.data);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(response.data),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 };
