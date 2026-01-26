@@ -6,8 +6,8 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
-import { fetchSelectedCard } from "../../netlify/functions/GetCards";
 import { fetchSelectedSubject } from "../data/GetSubjects";
+import axios from "axios";
 
 export default function Storytelling() {
   const { cardId } = useParams();
@@ -42,8 +42,12 @@ export default function Storytelling() {
 
   useEffect(() => {
     if (cardId) {
-      fetchSelectedCard(cardId)
-        .then((res) => setCard({ isLoading: false, data: res }))
+      axios
+        .get("/.netlify/functions/getCardById", {
+          params: { documentId: cardId },
+        })
+        .then((res) => console.log(res.data))
+        //.then((res) => setCard({ isLoading: false, data: res }))
         .catch((err) => console.warn(err));
     }
   }, [cardId]);

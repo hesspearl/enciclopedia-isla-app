@@ -1,29 +1,8 @@
 import { graphqlClient } from "../../src/data/graphClient";
 
-export const fetchCards = async () => {
-  const response = await graphqlClient.post("", {
-    query: `
-    query  {
-  cards {
-  documentId
-    title
-    short_description
-    cover_image {
-      url
-    }
-    subject {
-      subject_id
-    }
-   
-  }
-}
-    `,
-  });
+exports.handler = async (event) => {
+  const { documentId } = event.queryStringParameters;
 
-  return response.data.data.cards;
-};
-
-export const fetchSelectedCard = async (documentId: string) => {
   const response = await graphqlClient.post("", {
     query: `
       query Card($documentId: ID!) {
@@ -55,5 +34,5 @@ export const fetchSelectedCard = async (documentId: string) => {
     },
   });
 
-  return response.data.data.card;
+  return JSON.stringify(response.data);
 };
