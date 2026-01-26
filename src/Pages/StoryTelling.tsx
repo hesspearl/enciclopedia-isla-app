@@ -59,7 +59,7 @@ export default function Storytelling() {
         .get("/.netlify/functions/getCardById", {
           params: { documentId: cardId },
         })
-        .then((res) => setCard({ isLoading: false, data: res.data.data }))
+        .then((res) => setCard({ isLoading: false, data: res.data }))
         .catch((err) => console.warn(err));
     }
   }, [cardId]);

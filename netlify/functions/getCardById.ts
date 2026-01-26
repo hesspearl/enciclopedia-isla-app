@@ -42,7 +42,7 @@ exports.handler = async (event: HandlerEvent) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data),
+      body: JSON.stringify(response.data.data.card),
     };
   } catch (error) {
     return {
