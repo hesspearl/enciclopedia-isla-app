@@ -1,8 +1,9 @@
+import { HandlerEvent } from "@netlify/functions";
 import axios from "axios";
 const netlifyBaseUrl = process.env.VITE_BASE_URL;
 
-exports.handler = async (event) => {
-  const { documentId } = event.queryStringParameters;
+exports.handler = async (event: HandlerEvent) => {
+  const { documentId } = event.queryStringParameters as { documentId: string };
   try {
     const response = await axios.post(`${netlifyBaseUrl}/graphql`, {
       query: `
@@ -46,7 +47,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify(error),
     };
   }
 };
