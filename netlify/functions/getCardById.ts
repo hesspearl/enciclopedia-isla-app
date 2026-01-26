@@ -4,7 +4,7 @@ const netlifyBaseUrl = process.env.VITE_BASE_URL;
 exports.handler = async (event) => {
   const { documentId } = event.queryStringParameters;
 
-  const response = await axios.post(`${netlifyBaseUrl}`, {
+  const response = await axios.post(`${netlifyBaseUrl}/graphql`, {
     query: `
       query Card($documentId: ID!) {
         card(documentId: $documentId) {
