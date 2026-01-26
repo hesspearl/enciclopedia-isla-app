@@ -1,9 +1,10 @@
-import { graphqlClient } from "../../src/data/graphClient";
+import axios from "axios";
+const netlifyBaseUrl = process.env.VITE_BASE_URL;
 
 exports.handler = async (event) => {
   const { documentId } = event.queryStringParameters;
 
-  const response = await graphqlClient.post("", {
+  const response = await axios.post(`${netlifyBaseUrl}`, {
     query: `
       query Card($documentId: ID!) {
         card(documentId: $documentId) {
@@ -31,6 +32,10 @@ exports.handler = async (event) => {
     `,
     variables: {
       documentId,
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.VITE_API_TOKEN_SALT}`,
     },
   });
 
