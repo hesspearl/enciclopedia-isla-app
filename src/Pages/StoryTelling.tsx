@@ -64,7 +64,6 @@ export default function Storytelling() {
         .catch((err) => console.warn(err));
     }
   }, [cardId]);
-  console.log(currentCard.data);
 
   useEffect(() => {
     if (!currentCard.isLoading) {

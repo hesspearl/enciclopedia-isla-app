@@ -61,9 +61,29 @@ h2 {
   font-weight: bold;
 }
 h3 {
-  font-size: (--font-xl);
+  font-size: var(--font-xl);
   font-weight: bold;
 }
 p {
   font-size: var(--font-base);
+}
+ol {
+  list-style: decimal;
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+ul {
+  list-style: disc;
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+a {
+  color: #06342a;
+  font-weight: 600;
+}
+a:hover {
+  color: #06342a;
+  text-decoration: underline;
 }
