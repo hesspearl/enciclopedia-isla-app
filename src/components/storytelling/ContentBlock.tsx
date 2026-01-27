@@ -78,7 +78,7 @@ export default function ContentBlock({
             }}
           />
 
-          <p className="text-gray-600 text-lg leading-relaxed content-link">
+          <p className="content-link text-gray-600 text-lg leading-relaxed">
             <BlocksRenderer content={block.content_rich_text} />
           </p>
         </motion.div>

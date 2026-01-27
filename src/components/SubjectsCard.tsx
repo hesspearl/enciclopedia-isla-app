@@ -17,7 +17,7 @@ export default function SubjectCard({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <Link to={`/Storytelling/${card.card_id}`}>
+      <Link to={`/story/${card.card_id}`}>
         <motion.div
           className="group relative overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer"
           whileHover={{ y: -8 }}
