@@ -85,7 +85,7 @@ export default function WhatsAppButton() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-1">
-                      Se você deseja entender melhor o Islã, estamos aqui.
+                      Conheça o Islã, estamos aqui.
                     </h3>
                     <p className="text-sm text-slate-600">
                       Um espaço aberto para conhecer o Islã com clareza,
