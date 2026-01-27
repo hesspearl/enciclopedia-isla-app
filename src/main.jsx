@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import './index.css'
 import Home from './Pages/Home.jsx'
 import ErrorPage from './Pages/Error-page.jsx';
-import Storytelling from './Pages/StoryTelling.tsx';
+import Storytelling from './Pages/Story.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
 
 const RootLayout = () => (
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/Storytelling/:cardId", element: <Storytelling /> },
+      { path: "/story/:cardId", element: <Storytelling /> },
     ],
   },
 ]);

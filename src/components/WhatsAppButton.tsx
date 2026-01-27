@@ -3,9 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, MessageCircle, X } from "lucide-react";
 
 export default function WhatsAppButton() {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [hideBubble, setIsHideBubble] = useState(false);
+  const sessionHideBubble = sessionStorage.getItem("hideBubble");
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [hideBubble, setIsHideBubble] = useState(() =>
+    sessionHideBubble ? JSON.parse(sessionHideBubble) : false,
+  );
   // Substitua pelo número de WhatsApp que você deseja usar
   const whatsappNumber = "5521966305390"; // Formato: código do país + DDD + número
   const message =
@@ -41,7 +44,10 @@ export default function WhatsAppButton() {
                   animate={{ opacity: 1, x: 0 }}
                 >
                   <button
-                    onClick={() => setIsHideBubble(true)}
+                    onClick={() => {
+                      (setIsHideBubble(true),
+                        sessionStorage.setItem("hideBubble", "true"));
+                    }}
                     className="relative top-0 left-3 w-6 h-6 rounded-full z-10 bg-slate-900 flex items-center justify-center hover:bg-slate-200 transition-colors shadow-xl"
                   >
                     <ChevronRight className="w-4 h-4 text-slate-100 " />
