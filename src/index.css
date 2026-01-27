@@ -83,7 +83,7 @@ a {
   color: #06342a;
   font-weight: 600;
 }
-a:hover {
+.content-link a:hover {
   color: #06342a;
   text-decoration: underline;
 }
