@@ -9,11 +9,8 @@ export default function WhatsAppButton() {
   const [hideBubble, setIsHideBubble] = useState(() =>
     sessionHideBubble ? JSON.parse(sessionHideBubble) : false,
   );
-  // Substitua pelo número de WhatsApp que você deseja usar
-  const whatsappNumber = "5521966305390"; // Formato: código do país + DDD + número
-  const message =
-    "Olá! Gostaria de saber mais sobre o Islã. Encontrei seu contato pelo site.";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  const whatsappUrl = import.meta.env.VITE_WHATSAPP_COMMUNITY;
 
   return (
     <>

@@ -1,6 +1,7 @@
 interface ImportMetaEnv {
   readonly VITE_API_TOKEN_SALT: string;
   readonly VITE_BASE_URL: string;
+  readonly VITE_WHATSAPP_COMMUNITY: string;
   // add other env vars here...
 }
 
