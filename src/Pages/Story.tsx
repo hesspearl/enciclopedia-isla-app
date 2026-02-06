@@ -7,10 +7,12 @@ import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
 import { fetchSelectedSubject } from "../data/GetSubjects";
+import { cards } from "../data/getCards.json";
 import axios from "axios";
 
 export default function Storytelling() {
   const { cardId } = useParams();
+  const currentCardData = cards.find((card) => card.card_id === cardId);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [showBackButton, setShowBackButton] = useState(false);
   const navigate = useNavigate();
@@ -37,17 +39,17 @@ export default function Storytelling() {
     isLoading: boolean;
   }>({
     data: {
-      documentId: "",
-      card_id: "",
-      subject: {
+      documentId: currentCardData?.documentId ?? "",
+      card_id: currentCardData?.card_id ?? "",
+      subject: currentCardData?.subject ?? {
         subject_id: "",
         documentId: "",
       },
-      title: "",
-      short_description: "",
-      main_description: "",
+      title: currentCardData?.title ?? "",
+      short_description: currentCardData?.short_description ?? "",
+      main_description: currentCardData?.main_description ?? "",
       content_blocks: [],
-      cover_image: {
+      cover_image: currentCardData?.cover_image ?? {
         url: "",
       },
     },
@@ -58,7 +60,12 @@ export default function Storytelling() {
     if (cardId) {
       axios
         .get(`/api/${cardId}`)
-        .then((res) => setCard({ isLoading: false, data: res.data }))
+        .then((res) =>
+          setCard({
+            isLoading: false,
+            data: { ...currentCard.data, ...res.data },
+          }),
+        )
         .catch((err) => console.warn(err));
     }
   }, [cardId]);
@@ -118,19 +125,6 @@ export default function Storytelling() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [cardId]);
 
-  if (currentCard.isLoading || subject.isLoading) {
-    return (
-      <div className="flex items-center justify-center py-32">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-        >
-          <LoaderPinwheel className="w-8 h-8" style={{ color: "#06342a" }} />
-        </motion.div>
-      </div>
-    );
-  }
-
   if (!currentCard.data?.content_blocks) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-stone-50 px-6">
@@ -187,7 +181,7 @@ export default function Storytelling() {
             ))
           ) : (
             <div className="py-32 text-center text-gray-500">
-              <p>Conteúdo em desenvolvimento...</p>
+              <p>Abrindo o conteúdo... Um momento!</p>
             </div>
           )}
         </div>
@@ -196,9 +190,6 @@ export default function Storytelling() {
       {/* Navigation Footer */}
       <NavigationFooter nextCard={nextCard} checkIsLastCard={checkIsLastCard} />
       <ScrollRestoration />
-
-      {/* WhatsApp Button */}
-      {/* <WhatsAppButton /> */}
     </div>
   );
 }

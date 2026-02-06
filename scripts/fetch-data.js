@@ -30,6 +30,7 @@ async function fetchData() {
   card_id
     title
     short_description
+     main_description
     cover_image {
       url
     }

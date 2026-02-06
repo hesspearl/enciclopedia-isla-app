@@ -8,11 +8,6 @@ export default async (request: Request, context: Context) => {
       query Cards($filters: CardFiltersInput) {
   cards(filters: $filters) {
     card_id
-    documentId
-    title
-    subject {
-      documentId
-    }
     content_blocks {
       title
       image_url {
@@ -23,10 +18,6 @@ export default async (request: Request, context: Context) => {
         card_id
       }
     }
-    cover_image {
-      url
-    }
-    main_description
   }
 }
     `;
