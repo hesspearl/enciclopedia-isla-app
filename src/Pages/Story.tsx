@@ -57,9 +57,7 @@ export default function Storytelling() {
   useEffect(() => {
     if (cardId) {
       axios
-        .get("/.netlify/functions/getCardById", {
-          params: { cardId },
-        })
+        .get(`/api/${cardId}`)
         .then((res) => setCard({ isLoading: false, data: res.data }))
         .catch((err) => console.warn(err));
     }
