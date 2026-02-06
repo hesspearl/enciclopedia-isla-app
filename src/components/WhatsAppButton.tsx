@@ -41,6 +41,7 @@ export default function WhatsAppButton() {
                   animate={{ opacity: 1, x: 0 }}
                 >
                   <button
+                    title="Fechar"
                     onClick={() => {
                       (setIsHideBubble(true),
                         sessionStorage.setItem("hideBubble", "true"));
