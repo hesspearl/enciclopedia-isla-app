@@ -66,8 +66,8 @@ export default function Storytelling() {
   }, [cardId]);
 
   useEffect(() => {
-    if (!currentCard.isLoading) {
-      fetchSelectedSubject(currentCard.data.subject.documentId)
+    if (!currentCard.isLoading && currentCard?.data?.subject?.documentId) {
+      fetchSelectedSubject(currentCard?.data?.subject?.documentId)
         .then((res) => setSubjects({ isLoading: false, data: res }))
         .catch((err) => console.warn(err));
     }
@@ -133,7 +133,7 @@ export default function Storytelling() {
     );
   }
 
-  if (!currentCard.data.content_blocks.length) {
+  if (!currentCard.data?.content_blocks) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-stone-50 px-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">

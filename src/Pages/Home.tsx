@@ -1,34 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { fetchSubjects } from "../data/GetSubjects.js";
-import { fetchCards } from "../data/GetCards.js";
+import { subjects } from "../data/getSubjects.json";
+import { cards } from "../data/getCards.json";
 import SubjectSection from "../components/SubjectsSection.js";
 import { Sun, Loader2 } from "lucide-react";
 
 function Home() {
-  const [subjects, setSubjects] = useState<{
-    data: Subject[];
-    isLoading: boolean;
-  }>({
-    data: [],
-    isLoading: true,
-  });
-  const [cards, setCards] = useState<{ data: Card[]; isLoading: boolean }>({
-    data: [],
-    isLoading: true,
-  });
-
-  useEffect(() => {
-    fetchSubjects()
-      .then((res) => setSubjects({ isLoading: false, data: res }))
-      .catch((err) => console.warn(err));
-    fetchCards()
-      .then((res) => setCards({ isLoading: false, data: res }))
-      .catch((err) => console.warn(err));
-  }, []);
-
-  console.log(cards.data);
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 to-white">
       {/* Hero Section */}
@@ -109,16 +86,7 @@ function Home() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 pb-24">
-        {cards.isLoading && subjects.isLoading ? (
-          <div className="flex items-center justify-center py-32">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            >
-              <Loader2 className="w-8 h-8" style={{ color: "#06342a" }} />
-            </motion.div>
-          </div>
-        ) : subjects.data.length === 0 ? (
+        {subjects?.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -138,11 +106,11 @@ function Home() {
             </p>
           </motion.div>
         ) : (
-          subjects.data.map((subject) => (
+          subjects.map((subject) => (
             <SubjectSection
               key={subject.subject_id}
               subject={subject}
-              cards={cards.data.filter(
+              cards={cards.filter(
                 (card) => card.subject.subject_id === subject.subject_id,
               )}
             />

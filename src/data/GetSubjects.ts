@@ -4,7 +4,6 @@ export const fetchSubjects = async () => {
   const response = await graphqlClient.post("", {
     query: `
      query  {
- 
   subjects {
   documentId
     subject_id

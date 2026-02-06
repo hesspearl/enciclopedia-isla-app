@@ -13,12 +13,12 @@ interface Card {
   card_id: string;
   subject: {
     subject_id: string;
-    documentId: string;
+    documentId?: string;
   };
   title: string;
   short_description: string;
   main_description?: string;
-  content_blocks: Card_Blocks[];
+  content_blocks?: Card_Blocks[];
   cover_image: {
     url: string;
   };
@@ -29,7 +29,7 @@ interface Subject {
   subject_id: string;
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
 }
 
 type Card_Blocks = {

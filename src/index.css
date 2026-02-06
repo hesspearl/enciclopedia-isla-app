@@ -86,3 +86,8 @@ a {
   color: #06342a;
   text-decoration: underline;
 }
+
+b,
+strong {
+  font-weight: bold;
+}
