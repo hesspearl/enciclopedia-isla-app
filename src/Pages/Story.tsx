@@ -7,25 +7,23 @@ import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
 import { fetchSelectedSubject } from "../data/GetSubjects";
-import { cards } from "../data/getCards.json";
 import axios from "axios";
+import { handleCurrentCard } from "../data/CurrentCardData";
 
 export default function Storytelling() {
   const { cardId } = useParams();
-  const currentCardData = cards.find((card) => card.card_id === cardId);
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const [showBackButton, setShowBackButton] = useState(false);
   const navigate = useNavigate();
   const pathname = useLocation();
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const currentCardData = handleCurrentCard(cardId ?? "");
+
+  const [showBackButton, setShowBackButton] = useState(false);
+  const [messages, setMessages] = useState<string[]>([
+    "Abrindo o conteúdo... Um momento!",
+  ]);
   const [subject, setSubjects] = useState<{
-    data: {
-      subject_id: string;
-      cards: {
-        documentId: string;
-        title: string;
-      }[];
-    };
+    data: subjectProps;
     isLoading: boolean;
   }>({
     data: {
@@ -34,27 +32,16 @@ export default function Storytelling() {
     },
     isLoading: true,
   });
+
   const [currentCard, setCard] = useState<{
     data: Card;
     isLoading: boolean;
   }>({
-    data: {
-      documentId: currentCardData?.documentId ?? "",
-      card_id: currentCardData?.card_id ?? "",
-      subject: currentCardData?.subject ?? {
-        subject_id: "",
-        documentId: "",
-      },
-      title: currentCardData?.title ?? "",
-      short_description: currentCardData?.short_description ?? "",
-      main_description: currentCardData?.main_description ?? "",
-      content_blocks: [],
-      cover_image: currentCardData?.cover_image ?? {
-        url: "",
-      },
-    },
+    data: currentCardData,
     isLoading: true,
   });
+
+  /*api calls*/
 
   useEffect(() => {
     if (cardId) {
@@ -78,13 +65,18 @@ export default function Storytelling() {
     }
   }, [currentCard]);
 
-  useEffect(() => {
-    buttonRef.current?.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
+  /*next cards handlers*/
 
   const currentIndex = subject.data.cards.findIndex(
     (c) => c.documentId === currentCard?.data.documentId,
   );
+  // check if no cards after
+  const checkIsLastCard = () => {
+    if (currentIndex === subject.data.cards.length - 1) {
+      return true;
+    }
+    return false;
+  };
   // Find next card in the same subject
   const nextCard = React.useMemo(() => {
     if (!currentCard || !subject.data.cards.length) return null;
@@ -100,17 +92,22 @@ export default function Storytelling() {
     return subject.data.cards[0] || null;
   }, [currentCard, subject.data.cards]);
 
-  const checkIsLastCard = () => {
-    if (currentIndex === subject.data.cards.length - 1) {
-      return true;
-    }
-    return false;
-  };
+  /*scrolls handlers*/
 
+  //scroll to top
+  useEffect(() => {
+    buttonRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  // Scroll to top when card changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [cardId]);
+
+  // scroll to content
   const scrollToContent = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
+  // scroll when press back button
   useEffect(() => {
     const handleScroll = () => {
       setShowBackButton(window.scrollY > 100);
@@ -120,10 +117,22 @@ export default function Storytelling() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll to top when card changes
+  /*timeout*/
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [cardId]);
+    const timer1 = setTimeout(() => {
+      setMessages((prev) => [...prev, "Estamos com muito fluxo de dados..."]);
+    }, 1000 * 5);
+
+    const timer2 = setTimeout(() => {
+      setMessages(() => ["Por favor, atualize a página."]);
+    }, 1000 * 10);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
 
   if (!currentCard.data?.content_blocks) {
     return (
@@ -181,14 +190,23 @@ export default function Storytelling() {
             ))
           ) : (
             <div className="py-32 text-center text-gray-500">
-              <p>Abrindo o conteúdo... Um momento!</p>
+              {messages.map((m, i) => (
+                <p key={i}>{m}</p>
+              ))}
             </div>
           )}
         </div>
       }
 
       {/* Navigation Footer */}
-      <NavigationFooter nextCard={nextCard} checkIsLastCard={checkIsLastCard} />
+      {currentCard?.data?.content_blocks?.length > 0 ? (
+        <NavigationFooter
+          nextCard={nextCard}
+          checkIsLastCard={checkIsLastCard}
+        />
+      ) : (
+        <div />
+      )}
       <ScrollRestoration />
     </div>
   );

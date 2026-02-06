@@ -44,3 +44,11 @@ type Card_Blocks = {
     card_id: string;
   };
 };
+
+type subjectProps = {
+  subject_id: string;
+  cards: {
+    documentId: string;
+    title: string;
+  }[];
+};
