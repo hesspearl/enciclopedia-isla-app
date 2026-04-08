@@ -55,8 +55,8 @@ async function fetchData() {
 
 const getRes=async(query)=>{
  const serverBaseUrl =`${process.env.VITE_BASE_URL}/graphql`
-
-  const res = await fetch(serverBaseUrl, {
+try{
+const res = await fetch(serverBaseUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json",
            Authorization: `Bearer ${process.env.VITE_API_TOKEN_SALT}`,
@@ -65,6 +65,11 @@ const getRes=async(query)=>{
   });
 
   return res
+}catch(error){
+throw new Error(`HTTP error: ${res.status}`);
+
+}
+  
 }
 
 
