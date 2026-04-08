@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import axios from "axios";
 import { ArrowLeft, LoaderPinwheel } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollRestoration } from "react-router-dom";
@@ -7,7 +8,6 @@ import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
 import { fetchSelectedSubject } from "../data/GetSubjects";
-import axios from "axios";
 import { handleCurrentCard } from "../data/CurrentCardData";
 
 export default function Storytelling() {
@@ -46,14 +46,23 @@ export default function Storytelling() {
   useEffect(() => {
     if (cardId) {
       axios
-        .get(`/api/${cardId}`)
-        .then((res) =>
+        .post(`/api/${cardId}`, {
+          subjectId: currentCardData.subject.subject_id,
+        })
+        .then((res) => {
           setCard({
             isLoading: false,
             data: { ...currentCard.data, ...res.data },
-          }),
-        )
-        .catch((err) => console.warn(err));
+          });
+        })
+        .catch((err) => {
+          const data = err.response.data;
+
+          setCard({
+            isLoading: false,
+            data: { ...currentCard.data, ...data },
+          });
+        });
     }
   }, [cardId]);
 
@@ -171,7 +180,9 @@ export default function Storytelling() {
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = "")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            pathname.key === "default" ? navigate("/") : navigate(-1);
+          }}
         >
           <ArrowLeft className="w-4 h-4" />
           <span className="hidden sm:inline">Voltar</span>

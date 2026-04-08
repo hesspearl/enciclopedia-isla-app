@@ -58,7 +58,9 @@ const getRes=async(query)=>{
 
   const res = await fetch(serverBaseUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+           Authorization: `Bearer ${process.env.VITE_API_TOKEN_SALT}`,
+     },
     body: JSON.stringify({ query }),
   });
 
