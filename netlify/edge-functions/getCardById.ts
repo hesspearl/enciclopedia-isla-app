@@ -3,6 +3,9 @@ const netlifyBaseUrl = Netlify.env.get("VITE_BASE_URL");
 
 export default async (request: Request, context: Context) => {
   const { cardId } = context.params;
+  const body = await request.json(); // parse JSON body
+  const { subjectId } = body;
+  const folderPath = `./src/data/stories/${subjectId}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 3000);
 
@@ -53,8 +56,6 @@ export default async (request: Request, context: Context) => {
       const subjectId = result.data.cards[0]?.subject?.subject_id;
       const data = JSON.stringify(result.data.cards[0]);
 
-      const folderPath = `./src/data/stories/${subjectId}`;
-
       if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath, { recursive: true });
 
@@ -73,24 +74,28 @@ export default async (request: Request, context: Context) => {
         headers: { "Content-Type": "application/json" },
       });
     } catch (error) {
-      const body = await request.json(); // parse JSON body
-      const { subjectId } = body;
+      if (fs.existsSync(folderPath)) {
+        const body = await request.json(); // parse JSON body
+        const { subjectId } = body;
 
-      const raw = fs.readFileSync(
-        `./src/data/stories/${subjectId}/${cardId}.json`,
-        "utf-8",
-      );
-      const fallbackData = JSON.parse(raw);
+        const raw = fs.readFileSync(
+          `./src/data/stories/${subjectId}/${cardId}.json`,
+          "utf-8",
+        );
+        const fallbackData = JSON.parse(raw);
 
-      return new Response(JSON.stringify(fallbackData), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+        return new Response(JSON.stringify(fallbackData), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
+      } else {
+        return new Response(JSON.stringify(error), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
     }
   }
-
-  const body = await request.json(); // parse JSON body
-  const { subjectId } = body;
 
   const raw = fs.readFileSync(
     `./src/data/stories/${subjectId}/${cardId}.json`,
