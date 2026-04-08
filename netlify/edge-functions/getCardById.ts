@@ -8,7 +8,7 @@ export default async (request: Request, context: Context) => {
   const folderPath = `./src/data/stories/${subjectId}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 3000);
-
+  console.log("fetching from strapi");
   if (request.method === "POST") {
     try {
       const query = `
@@ -50,12 +50,12 @@ export default async (request: Request, context: Context) => {
           },
         }),
       });
+      console.log(response, "response from strapi");
 
       clearTimeout(timeout);
       const result = await response.json();
-      const subjectId = result.data.cards[0]?.subject?.subject_id;
       const data = JSON.stringify(result.data.cards[0]);
-
+      console.log(result);
       if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath, { recursive: true });
 
@@ -74,10 +74,8 @@ export default async (request: Request, context: Context) => {
         headers: { "Content-Type": "application/json" },
       });
     } catch (error) {
+      console.log(error, "error fetching from strapi");
       if (fs.existsSync(folderPath)) {
-        const body = await request.json(); // parse JSON body
-        const { subjectId } = body;
-
         const raw = fs.readFileSync(
           `./src/data/stories/${subjectId}/${cardId}.json`,
           "utf-8",
@@ -89,6 +87,8 @@ export default async (request: Request, context: Context) => {
           headers: { "Content-Type": "application/json" },
         });
       } else {
+        console.log(error);
+
         return new Response(JSON.stringify(error), {
           status: 500,
           headers: { "Content-Type": "application/json" },
@@ -96,6 +96,7 @@ export default async (request: Request, context: Context) => {
       }
     }
   }
+  console.log("fallback");
 
   const raw = fs.readFileSync(
     `./src/data/stories/${subjectId}/${cardId}.json`,
