@@ -12,6 +12,7 @@
     "netlify": "netlify dev"
   },
   "dependencies": {
+    "@netlify/blobs": "^10.7.4",
     "@netlify/functions": "^5.1.2",
     "@strapi/blocks-react-renderer": "^1.0.2",
     "@tailwindcss/vite": "^4.1.18",

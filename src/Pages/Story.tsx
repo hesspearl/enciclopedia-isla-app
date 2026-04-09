@@ -46,23 +46,14 @@ export default function Storytelling() {
   useEffect(() => {
     if (cardId) {
       axios
-        .post(`/api/${cardId}`, {
-          subjectId: currentCardData.subject.subject_id,
-        })
+        .get(`/api/${cardId}`)
         .then((res) => {
           setCard({
             isLoading: false,
             data: { ...currentCard.data, ...res.data },
           });
         })
-        .catch((err) => {
-          const data = err.response.data;
-
-          setCard({
-            isLoading: false,
-            data: { ...currentCard.data, ...data },
-          });
-        });
+        .catch((err) => {});
     }
   }, [cardId]);
 

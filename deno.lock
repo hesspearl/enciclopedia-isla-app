@@ -12,6 +12,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@eslint/js@^9.39.1",
+        "npm:@netlify/blobs@^10.7.4",
         "npm:@netlify/functions@^5.1.2",
         "npm:@strapi/blocks-react-renderer@^1.0.2",
         "npm:@tailwindcss/vite@^4.1.18",
