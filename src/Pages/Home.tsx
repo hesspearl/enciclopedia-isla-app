@@ -35,7 +35,7 @@ function Home() {
                   "linear-gradient(to bottom right, #06342a, #08493a)",
               }}
             >
-              <Sun className="w-10 h-10 text-white" />
+              <img src="/icons/dawah brasil.jpeg" className="rounded-full" />
             </motion.div>
 
             <motion.h1
