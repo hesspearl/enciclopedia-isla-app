@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-//import SubjectCard from './SubjectCard';
 import { BookOpen } from "lucide-react";
 import SubjectCard from "./SubjectsCard";
 

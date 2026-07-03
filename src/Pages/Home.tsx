@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { subjects } from "../data/getSubjects.json";
 import { cards } from "../data/getCards.json";
-import SubjectSection from "../components/SubjectsSection.js";
+import SubjectSection from "../components/home/SubjectSection";
 import { Sun, Loader2 } from "lucide-react";
+import MythAccordion from "../components/home/MythAcoordion";
 
 function Home() {
   return (
@@ -117,6 +118,7 @@ function Home() {
           ))
         )}
       </main>
+      <MythAccordion />
     </div>
   );
 }

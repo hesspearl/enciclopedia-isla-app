@@ -4,7 +4,7 @@
     "module": "ESNext",
     "jsx": "react-jsx", 
     "lib": ["DOM", "ESNext"], 
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
      "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

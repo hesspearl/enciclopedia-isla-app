@@ -1,7 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { serverBaseUrl } from "../data/server";
 
 export default function SubjectCard({
   card,

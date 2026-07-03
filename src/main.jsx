@@ -6,11 +6,13 @@ import Home from './Pages/Home.jsx'
 import ErrorPage from './Pages/Error-page.jsx';
 import Storytelling from './Pages/Story.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
+import Footer from './components/Footer.tsx';
 
 const RootLayout = () => (
   <>
     <WhatsAppButton />
     <Outlet />
+    <Footer />
   </>
 );
 
