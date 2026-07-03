@@ -1,4 +1,4 @@
-import { MessageCircle, Youtube } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const whatsappNumber = "5511999999999";
