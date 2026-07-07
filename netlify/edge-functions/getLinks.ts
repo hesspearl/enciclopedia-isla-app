@@ -3,7 +3,13 @@ const netlifyBaseUrl = Netlify.env.get("VITE_BASE_URL");
 
 export default async (request: Request, context: Context) => {
   const uploadsStore = getStore("file-uploads");
+  let cached = await uploadsStore.get("Links");
 
+  if (cached) {
+    return new Response(cached, {
+      headers: { "content-type": "application/json" },
+    });
+  }
   try {
     const query = `
     query DescriptionsOfLinks {
