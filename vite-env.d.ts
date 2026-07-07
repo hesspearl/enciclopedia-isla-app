@@ -40,7 +40,7 @@ type Card_Blocks = {
     url: string;
   };
   content_rich_text: [];
-
+  sequence_marker: "none" | "number";
   card: {
     card_id: string;
   };
@@ -51,5 +51,31 @@ type subjectProps = {
   cards: {
     documentId: string;
     title: string;
+  }[];
+};
+
+type video = {
+  documentId: string;
+  title: string;
+  description: string;
+  youtube_video_id: string;
+  thumbnail: {
+    url: string;
+    name: string;
+  };
+};
+
+type link = {
+  documentId: string;
+  title: string;
+  description: string;
+  thumbnail: {
+    name: string;
+    url: string;
+  };
+  external_link_text: {
+    documentId: string;
+    label: string;
+    external_link_address: string;
   }[];
 };

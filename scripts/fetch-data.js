@@ -10,6 +10,11 @@ async function fetchData() {
       subject_id
       title
       description
+      cards {
+      title
+      documentId
+      card_id
+    }
        }
      }
       `

@@ -57,15 +57,18 @@ export default function ContentBlock({
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           {/* Step Number */}
-          <motion.div
-            className="inline-flex items-center justify-center w-12 h-12 rounded-full text-white font-bold text-lg mb-6 shadow-lg"
-            style={{
-              background: "linear-gradient(to bottom right, #06342a, #08493a)",
-            }}
-            whileHover={{ scale: 1.1, rotate: 5 }}
-          >
-            {index + 1}
-          </motion.div>
+          {block.sequence_marker === "number" && (
+            <motion.div
+              className="inline-flex items-center justify-center w-12 h-12 rounded-full text-white font-bold text-lg mb-6 shadow-lg"
+              style={{
+                background:
+                  "linear-gradient(to bottom right, #06342a, #08493a)",
+              }}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              {index + 1}
+            </motion.div>
+          )}
 
           <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
             {block.title}

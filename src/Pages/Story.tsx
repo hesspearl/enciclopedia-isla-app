@@ -7,7 +7,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import HeroSection from "../components/storytelling/HeroSection";
 import ContentBlock from "../components/storytelling/ContentBlock";
 import NavigationFooter from "../components/storytelling/NavigationFooter";
-import { fetchSelectedSubject } from "../data/GetSubjects";
+import { getSelectedSubject } from "../data/GetSubjects";
 import { handleCurrentCard } from "../data/CurrentCardData";
 
 export default function Storytelling() {
@@ -46,7 +46,7 @@ export default function Storytelling() {
   useEffect(() => {
     if (cardId) {
       axios
-        .get(`/api/${cardId}`)
+        .get(`/api/card/${cardId}`)
         .then((res) => {
           setCard({
             isLoading: false,
@@ -59,9 +59,10 @@ export default function Storytelling() {
 
   useEffect(() => {
     if (!currentCard.isLoading && currentCard?.data?.subject?.documentId) {
-      fetchSelectedSubject(currentCard?.data?.subject?.documentId)
-        .then((res) => setSubjects({ isLoading: false, data: res }))
-        .catch((err) => console.warn(err));
+      const selectedSubject = getSelectedSubject(
+        currentCard?.data?.subject?.documentId,
+      );
+      setSubjects({ isLoading: false, data: selectedSubject });
     }
   }, [currentCard]);
 

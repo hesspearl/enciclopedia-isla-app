@@ -5,6 +5,9 @@ import { cards } from "../data/getCards.json";
 import SubjectSection from "../components/home/SubjectSection";
 import { Sun, Loader2 } from "lucide-react";
 import MythAccordion from "../components/home/MythAcoordion";
+import AboutSection from "../components/home/AboutSection";
+import UsefulLinks from "../components/home/UsefulLinks";
+import VideoCarousel from "../components/home/VideosCarousel";
 
 function Home() {
   return (
@@ -118,7 +121,10 @@ function Home() {
           ))
         )}
       </main>
+      <AboutSection />
+      <VideoCarousel />
       <MythAccordion />
+      <UsefulLinks />
     </div>
   );
 }

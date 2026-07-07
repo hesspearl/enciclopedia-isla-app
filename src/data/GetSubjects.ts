@@ -1,40 +1,12 @@
-import { graphqlClient } from "./graphClient";
+import { subjects } from "./getSubjects.json";
 
-export const fetchSubjects = async () => {
-  const response = await graphqlClient.post("", {
-    query: `
-     query  {
-  subjects {
-  documentId
-    subject_id
-    title
-    description
-  }
-}
-    `,
-  });
+export const getSelectedSubject = (documentId: string) => {
+  const selectedSubject = subjects.find(
+    (subject) => subject.documentId === documentId,
+  );
 
-  return response.data.data.subjects;
-};
-
-export const fetchSelectedSubject = async (documentId: string) => {
-  const response = await graphqlClient.post("", {
-    query: `
-     query Subject($documentId: ID!) {
-  subject(documentId: $documentId) {
-    documentId
-    cards {
-      title
-      documentId
-      card_id
-    }
-  }
-}
-    `,
-    variables: {
-      documentId,
-    },
-  });
-
-  return response.data.data.subject;
+  return {
+    subject_id: selectedSubject?.subject_id!,
+    cards: selectedSubject?.cards ?? [],
+  };
 };

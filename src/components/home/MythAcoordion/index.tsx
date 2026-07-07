@@ -8,34 +8,44 @@ import {
 
 const faqItems = [
   {
-    question: "O Islam é uma religião violenta?",
+    question: "O Islã é uma religião violenta?",
     answer:
-      "Não. A palavra 'Islam' vem da raiz árabe 'salam', que significa paz. O Islam condena a violência contra inocentes. O Alcorão estabelece que matar uma pessoa inocente é como matar toda a humanidade (Alcorão 5:32). Infelizmente, a imagem do Islam foi distorcida pelas ações de uma minoria que não representa os mais de 1,9 bilhão de muçulmanos no mundo.",
+      'Não. O Islã não é uma religião violenta. A palavra "Islã" vem da raiz árabe relacionada à ideia de submissão a Deus, e é por meio dessa submissão ao Criador que se busca a paz. O Islã condena a violência contra pessoas inocentes, e o Alcorão afirma que quem mata uma pessoa inocente é como se tivesse matado toda a humanidade, enquanto quem salva uma vida é como se tivesse salvado toda a humanidade (Alcorão 5:32). Infelizmente, a imagem do Islã foi distorcida pelas ações de grupos extremistas que não representam os ensinamentos da religião nem a imensa maioria dos mais de 1,9 bilhão de muçulmanos em todo o mundo.',
   },
   {
-    question: "As mulheres têm direitos no Islam?",
+    question: "As mulheres têm direitos no Islã?",
     answer:
-      "Sim. O Islam concedeu direitos às mulheres há mais de 1.400 anos, incluindo o direito à educação, ao trabalho, à herança, ao divórcio e ao consentimento no casamento — direitos que no Ocidente só surgiram séculos depois. A mulher muçulmana tem o direito de manter seu próprio dinheiro e propriedade, sem obrigação de gastá-lo com a família.",
+      "Sim. O Islã concedeu direitos às mulheres há mais de 1.440 anos, no sétimo século (era comum), incluindo o direito à educação, à herança, ao divórcio, trabalho e ao consentimento no casamento — direitos que no Ocidente só surgiram muitos séculos depois. A mulher muçulmana tem o direito de manter seu próprio dinheiro e propriedade, sem obrigação de gastá-lo com a família.",
   },
   {
     question: "Muçulmanos adoram uma divindade diferente?",
     answer:
-      "Não. Muçulmanos adoram o mesmo Deus de Abraão, Moisés e Jesus (que a paz esteja com eles). A palavra 'Allah' é simplesmente 'Deus' em árabe — os cristãos árabes também chamam Deus de 'Allah'. O Islam é uma religião monoteísta pura, sem associação de parceiros a Deus.",
+      'Não. Os muçulmanos adoram o mesmo Deus de Abraão, Moisés e Jesus (que a paz esteja com eles). A palavra "Allah" significa simplesmente "Deus" em árabe e é utilizada tanto por muçulmanos quanto por cristãos e judeus de língua árabe para se referirem ao Criador. O Islã é uma religião estritamente monoteísta, que ensina a adoração e obediência exclusiva de Deus, sem associar parceiros ou intermediários à Sua divindade. Dar o direito de adoração a qualquer outro ser ou coisa é considerado idolatria, o maior pecado no Islã.',
   },
   {
-    question: "O Islam obriga a conversão?",
+    question: "O Islã obriga a conversão?",
     answer:
       "Não. O Alcorão é claro: 'Não há compulsão na religião' (Alcorão 2:256). A fé deve ser uma escolha sincera do coração. Historicamente, comunidades judias e cristãs viveram em paz sob governança islâmica por séculos, mantendo suas religiões.",
   },
   {
-    question: "O que o Islam diz sobre Jesus?",
+    question: "O que o Islã diz sobre Jesus?",
     answer:
-      "Muçulmanos amam e reverenciam Jesus (que a paz esteja com ele), chamado de 'Isa' em árabe. Ele é um dos maiores profetas de Deus, nascido de uma virgem (Maria/Mariam), que realizou milagres com a permissão de Deus. A diferença é que o Islam não o considera divino, mas sim um servo e mensageiro de Deus.",
+      "Muçulmanos amam e reverenciam Jesus (que a paz esteja com ele), chamado de 'Isa' em árabe. Ele é um dos maiores profetas de Deus, nascido de uma virgem (Maria/Mariam), que realizou milagres com a permissão de Deus. A diferença é que o Islã não o considera divino, mas sim um servo e mensageiro de Deus.",
   },
   {
     question: "O que é a jihad?",
     answer:
       "A palavra 'jihad' significa 'esforço' ou 'luta'. A 'jihad maior' é a luta interior contra o ego e as más inclinações — o esforço diário para ser uma pessoa melhor. A 'jihad menor' refere-se à legítima defesa contra agressão, com regras éticas estritas que proíbem atacar civis, destruir colheitas ou árvores.",
+  },
+  {
+    question: "O Islã é compatível com a ciência?",
+    answer:
+      "Sim. O Islã incentiva a busca pelo conhecimento e a reflexão sobre o mundo natural. Muitos muçulmanos contribuíram significativamente para a ciência, matemática, medicina e filosofia durante a Idade de Ouro Islâmica. O Alcorão contém versículos que encorajam a observação da natureza e o estudo do universo como sinais da criação de Deus.",
+  },
+  {
+    question: "Por que um cristão ou um judeu consideraria retornar ao Islã?",
+    answer:
+      "Porque, segundo o Islã, todos os seres humanos nascem em um estado natural de submissão a Deus (fitrah). Nesse sentido, quem abraça o Islã não está adotando uma nova religião, mas retornando à sua disposição original de adorar unicamente o Criador. Além disso, os muçulmanos acreditam que Abraão, Moisés, Jesus e Muhammad (que a paz esteja com todos eles) transmitiram a mesma mensagem fundamental: adorar somente a Deus e seguir Seus mensageiros. Por isso, o Islã convida cristãos, judeus e todas as pessoas a reconhecerem Muhammad como o último mensageiro e a retomarem essa fé monoteísta em sua forma completa.",
   },
 ];
 

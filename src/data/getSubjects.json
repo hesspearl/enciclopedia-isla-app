@@ -4,7 +4,14 @@
       "documentId": "it8bcyapsmozt7t0e7hp5dz8",
       "subject_id": "praticas-do-isla",
       "title": "Práticas do Islã",
-      "description": "As práticas do Islã prescritas por Allah aos muçulmanos."
+      "description": "As práticas do Islã prescritas por Allah aos muçulmanos.",
+      "cards": [
+        {
+          "title": "Aprenda a oração",
+          "documentId": "p4uk9l0h1qcwhen1p3wbzm1p",
+          "card_id": "aprenda-a-oracao"
+        }
+      ]
     }
   ]
 }

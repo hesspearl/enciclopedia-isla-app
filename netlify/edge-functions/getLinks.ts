@@ -2,31 +2,25 @@ import { getStore } from "@netlify/blobs";
 const netlifyBaseUrl = Netlify.env.get("VITE_BASE_URL");
 
 export default async (request: Request, context: Context) => {
-  const { cardId } = context.params;
   const uploadsStore = getStore("file-uploads");
-  const key = cardId;
 
   try {
     const query = `
-      query Cards($filters: CardFiltersInput) {
-  cards(filters: $filters) {
-    card_id
-      subject {
-      subject_id
-    
+    query DescriptionsOfLinks {
+    descriptionsOfLinks {
+        documentId
+        title
+        description
+        thumbnail {
+            name
+            url
+        }
+        external_link_text {
+            documentId
+               label
+            external_link_address
+        }
     }
-    content_blocks {
-      title
-      image_url {
-        url
-      }
-      content_rich_text
-      card {
-        card_id
-      }
-     sequence_marker
-    }
-  }
 }
     `;
 
@@ -37,22 +31,15 @@ export default async (request: Request, context: Context) => {
         "Cache-Control": "public, max-age=600",
         Authorization: `Bearer ${Netlify.env.get("VITE_API_TOKEN_SALT")}`,
       },
-      body: JSON.stringify({
-        query,
-        variables: {
-          filters: {
-            card_id: { eq: key },
-          },
-        },
-      }),
+      body: JSON.stringify({ query }),
     });
 
     let result;
     result = await response.json();
-    const card = result.data.cards[0];
-    const data = JSON.stringify(card);
+    const videos = result.data;
+    const data = JSON.stringify(videos);
 
-    await uploadsStore.set(key, data, {
+    await uploadsStore.set("Links", data, {
       metadata: { country: context.geo.country.name },
     });
 

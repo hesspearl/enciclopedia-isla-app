@@ -3,5 +3,14 @@
   publish = "dist"
 
 [[edge_functions]]
-  path = "/api/:cardId"
+  path = "/api/card/:cardId"
   function = "getCardById"
+
+[[edge_functions]]
+  path = "/api/videos"
+  function = "getVideos"
+
+  
+[[edge_functions]]
+  path = "/api/links"
+  function = "getLinks"
