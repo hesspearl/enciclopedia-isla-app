@@ -5,6 +5,13 @@ export default async (request: Request, context: Context) => {
   const { cardId } = context.params;
   const uploadsStore = getStore("file-uploads");
   const key = cardId;
+  let cached = await uploadsStore.get(key);
+
+  if (cached) {
+    return new Response(cached, {
+      headers: { "content-type": "application/json" },
+    });
+  }
 
   try {
     const query = `
