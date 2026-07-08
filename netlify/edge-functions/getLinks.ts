@@ -1,5 +1,6 @@
 import { getStore } from "@netlify/blobs";
-import { apiTokenSalt, netlifyBaseUrl } from "./base";
+const netlifyBaseUrl = Netlify.env.get("BASE_URL");
+const apiTokenSalt = Netlify.env.get("API_TOKEN_SALT");
 
 export default async (request: Request, context: Context) => {
   const uploadsStore = getStore("file-uploads");
