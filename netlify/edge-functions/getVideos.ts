@@ -1,5 +1,5 @@
 import { getStore } from "@netlify/blobs";
-const netlifyBaseUrl = Netlify.env.get("VITE_BASE_URL");
+import { apiTokenSalt, netlifyBaseUrl } from "./base";
 
 export default async (request: Request, context: Context) => {
   const uploadsStore = getStore("file-uploads");
@@ -32,7 +32,7 @@ export default async (request: Request, context: Context) => {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "public, max-age=600",
-        Authorization: `Bearer ${Netlify.env.get("VITE_API_TOKEN_SALT")}`,
+        Authorization: `Bearer ${apiTokenSalt}`,
       },
       body: JSON.stringify({ query }),
     });
