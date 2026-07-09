@@ -19,6 +19,7 @@ export default async (request: Request, context: Context) => {
         title
         description
         youtube_video_id
+        display_order
         thumbnail {
             url
             name

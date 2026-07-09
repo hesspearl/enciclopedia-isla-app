@@ -59,6 +59,7 @@ type video = {
   title: string;
   description: string;
   youtube_video_id: string;
+  display_order?: number;
   thumbnail: {
     url: string;
     name: string;

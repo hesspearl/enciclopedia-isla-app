@@ -33,6 +33,21 @@ export default function VideoCarousel() {
 
   if (videos?.length === 0 || !videos) return null;
 
+  const sortedVideos = [...videos].sort((a, b) => {
+    const aFalsy = !a.display_order;
+    const bFalsy = !b.display_order;
+
+    // If both are falsy, keep their relative order
+    if (aFalsy && bFalsy) return 0;
+    // If only a is falsy, put a after b
+    if (aFalsy) return 1;
+    // If only b is falsy, put b after a
+    if (bFalsy) return -1;
+
+    // Both have display_order -> sort ascending
+    return a.display_order! - b.display_order!;
+  });
+
   return (
     <section className="bg-stone-50 py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-6">
@@ -78,7 +93,7 @@ export default function VideoCarousel() {
                 width: `calc(${videos.length * (100 / itemsPerView)}% - ${videos.length * 12 * mobileRule}px)`,
               }}
             >
-              {videos.map((video) => (
+              {sortedVideos.map((video) => (
                 <div
                   id="snap"
                   key={video.documentId}
